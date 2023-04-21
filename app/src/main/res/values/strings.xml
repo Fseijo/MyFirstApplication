@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MyFirstApplication</string>
+    <string name="app_name">CubanFastFood</string>
     <string name="icon_description">"fast_food_image"</string>
 </resources>
