@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CubanFastFood</string>
-    <string name="icon_description">"fast_food_image"</string>
+    <string name="icon_description">fast_food_image</string>
+    <string name="rest_hours">Today\'s hours: </string>
 </resources>

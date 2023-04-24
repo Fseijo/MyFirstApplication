@@ -1,14 +1,12 @@
 package com.example.myfirstapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
 
-
-import com.example.myfirstapplication.model.Hour;
-import com.example.myfirstapplication.model.Menu;
 import com.example.myfirstapplication.model.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +14,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle("Restaurant List");
+
         try {
            List<Restaurant> restaurantList = getRestaurantsList();
         } catch (IOException e) {
