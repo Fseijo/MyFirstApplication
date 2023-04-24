@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            getRestaurantsList();
+           List<Restaurant> restaurantList = getRestaurantsList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,28 +43,17 @@ public class MainActivity extends AppCompatActivity {
         byte[] buffer = new byte[size];
         is.read(buffer);
         is.close();
-
         jsonString = new String(buffer, "UTF-8");
-
         return jsonString;
     }
 
     public List<Restaurant> getRestaurantsList() throws IOException {
         String jsonFileString = MainActivity.getJsonFromAssets(getApplicationContext(), "restaurant.json");
         Gson gson = new Gson();
-        Type listRestaurantsType = new TypeToken<List<Restaurant>>() {
-        }.getType();
+        Type listRestaurantsType = new TypeToken<Restaurant[]>() {}.getType();
 
-        List<Restaurant> restaurants = new ArrayList<>();
-        List<Hour> hours = new ArrayList<>();
-        List<Menu> menus = new ArrayList<>();
-
-        List<Restaurant> restaurantsList = gson.fromJson(jsonFileString, listRestaurantsType);
-        for (int i = 0; i< restaurantsList.size(); i++) {
-            restaurants.add(restaurantsList.get(i));
-        }
+        Restaurant[] restaurantsList = gson.fromJson(jsonFileString, listRestaurantsType);
+        List<Restaurant> restaurants = Arrays.asList(restaurantsList);
         return restaurants;
     }
-
-
 }

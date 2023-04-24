@@ -8,14 +8,14 @@ public class Restaurant {
     private String address;
     private Float delivery_charge;
     private String image;
-    private List<Hour> hours;
+    private Hour hours;
     private List<Menu> menus;
 
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, String address, Float delivery_charge, String image, List<Hour> hours, List<Menu> menus) {
+    public Restaurant(String name, String address, Float delivery_charge, String image, Hour hours, List<Menu> menus) {
         this.name = name;
         this.address = address;
         this.delivery_charge = delivery_charge;
@@ -56,11 +56,11 @@ public class Restaurant {
         this.image = image;
     }
 
-    public List<Hour> getHours() {
+    public Hour getHours() {
         return hours;
     }
 
-    public void setHours(List<Hour> hours) {
+    public void setHours(Hour hours) {
         this.hours = hours;
     }
 

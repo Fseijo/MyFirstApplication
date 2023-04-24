@@ -1,80 +1,80 @@
 package com.example.myfirstapplication.model;
 
 public class Hour {
-    private String sunday;
-    private String monday;
-    private String tuesday;
-    private String wednesday;
-    private String thursday;
-    private String friday;
-    private String saturday;
+    private String Sunday;
+    private String Monday;
+    private String Tuesday;
+    private String Wednesday;
+    private String Thursday;
+    private String Friday;
+    private String Saturday;
 
     public Hour() {
     }
 
     public Hour(String sunday, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday) {
-        this.sunday = sunday;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.saturday = saturday;
+        this.Sunday = sunday;
+        this.Monday = monday;
+        this.Tuesday = tuesday;
+        this.Wednesday = wednesday;
+        this.Thursday = thursday;
+        this.Friday = friday;
+        this.Saturday = saturday;
     }
 
     public String getSunday() {
-        return sunday;
+        return Sunday;
     }
 
     public void setSunday(String sunday) {
-        this.sunday = sunday;
+        this.Sunday = sunday;
     }
 
     public String getMonday() {
-        return monday;
+        return Monday;
     }
 
     public void setMonday(String monday) {
-        this.monday = monday;
+        this.Monday = monday;
     }
 
     public String getTuesday() {
-        return tuesday;
+        return Tuesday;
     }
 
     public void setTuesday(String tuesday) {
-        this.tuesday = tuesday;
+        this.Tuesday = tuesday;
     }
 
     public String getWednesday() {
-        return wednesday;
+        return Wednesday;
     }
 
     public void setWednesday(String wednesday) {
-        this.wednesday = wednesday;
+        this.Wednesday = wednesday;
     }
 
     public String getThursday() {
-        return thursday;
+        return Thursday;
     }
 
     public void setThursday(String thursday) {
-        this.thursday = thursday;
+        this.Thursday = thursday;
     }
 
     public String getFriday() {
-        return friday;
+        return Friday;
     }
 
     public void setFriday(String friday) {
-        this.friday = friday;
+        this.Friday = friday;
     }
 
     public String getSaturday() {
-        return saturday;
+        return Saturday;
     }
 
     public void setSaturday(String saturday) {
-        this.saturday = saturday;
+        this.Saturday = saturday;
     }
 }
