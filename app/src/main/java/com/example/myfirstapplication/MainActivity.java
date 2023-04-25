@@ -3,10 +3,14 @@ package com.example.myfirstapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myfirstapplication.adapter.RestaurantAdapter;
 import com.example.myfirstapplication.model.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,22 +22,33 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RestaurantAdapter.RestaurantListClickListener {
 
+    private RecyclerView recyclerView;
+    private RestaurantAdapter restaurantAdapter;
+    List<Restaurant> restaurantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("Restaurant List");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Restaurant List");
 
+        //get recycler view
+        recyclerView = (RecyclerView)findViewById(R.id.myRecyclerView);
+        //get restaurant list from json file
         try {
-           List<Restaurant> restaurantList = getRestaurantsList();
+           restaurantList = getRestaurantsList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        //get adapter
+        restaurantAdapter = new RestaurantAdapter(restaurantList, this);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(restaurantAdapter);
     }
 
     @NonNull
@@ -56,5 +71,12 @@ public class MainActivity extends AppCompatActivity {
         Restaurant[] restaurantsList = gson.fromJson(jsonFileString, listRestaurantsType);
         List<Restaurant> restaurants = Arrays.asList(restaurantsList);
         return restaurants;
+    }
+
+    @Override
+    public void onItemClicked(Restaurant restaurant) {
+        Intent intent = new Intent(MainActivity.this, RestaurantMenuMainActivity.class);
+        intent.putExtra("Restaurant", String.valueOf(restaurant.getName()));
+        startActivity(intent);
     }
 }

@@ -1,5 +1,10 @@
 package com.example.myfirstapplication.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class Hour {
     private String Sunday;
     private String Monday;
@@ -21,6 +26,7 @@ public class Hour {
         this.Friday = friday;
         this.Saturday = saturday;
     }
+
 
     public String getSunday() {
         return Sunday;
@@ -76,5 +82,30 @@ public class Hour {
 
     public void setSaturday(String saturday) {
         this.Saturday = saturday;
+    }
+
+    public String getTodaysHours() {
+        Calendar calendar = Calendar.getInstance();
+        Date date  = calendar.getTime();
+        String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime());
+        switch (day) {
+            case "Sunday":
+                return this.Sunday;
+            case "Monday":
+                return this.Monday;
+            case "Tuesday":
+                return this.Tuesday;
+            case "Wednesday":
+                return this.Wednesday;
+            case "Thursday":
+                return this.Thursday;
+            case "Friday":
+                return this.Friday;
+            case "Saturday":
+                return this.Saturday;
+            default:
+                return this.Sunday;
+
+        }
     }
 }
