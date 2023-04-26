@@ -68,7 +68,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             restName = itemView.findViewById(R.id.rest_name);
             restAddress = itemView.findViewById(R.id.rest_address);
             restHours = itemView.findViewById(R.id.rest_hours);
-            cardView = itemView.findViewById(R.id.myRecyclerView);
+            cardView = itemView.findViewById(R.id.restCardView);
         }
 
         void display(@NonNull Restaurant restaurant) {

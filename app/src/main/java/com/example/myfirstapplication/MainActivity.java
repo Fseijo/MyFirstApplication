@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements RestaurantAdapter
     @Override
     public void onItemClicked(Restaurant restaurant) {
         Intent intent = new Intent(MainActivity.this, RestaurantMenuMainActivity.class);
-        intent.putExtra("Restaurant", String.valueOf(restaurant.getName()));
+        intent.putExtra("Restaurant", restaurant);
         startActivity(intent);
     }
 }

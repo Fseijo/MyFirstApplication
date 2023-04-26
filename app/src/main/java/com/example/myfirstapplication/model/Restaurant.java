@@ -1,9 +1,14 @@
 package com.example.myfirstapplication.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant implements Parcelable {
     private String name;
     private String address;
     private Float delivery_charge;
@@ -23,6 +28,30 @@ public class Restaurant {
         this.hours = hours;
         this.menus = menus;
     }
+
+    protected Restaurant(Parcel in) {
+        name = in.readString();
+        address = in.readString();
+        if (in.readByte() == 0) {
+            delivery_charge = null;
+        } else {
+            delivery_charge = in.readFloat();
+        }
+        image = in.readString();
+        menus = in.createTypedArrayList(Menu.CREATOR);
+    }
+
+    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -70,5 +99,24 @@ public class Restaurant {
 
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(address);
+        if (delivery_charge == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(delivery_charge);
+        }
+        dest.writeString(image);
+        dest.writeTypedList(menus);
     }
 }
