@@ -12,12 +12,15 @@ import com.example.myfirstapplication.adapter.MenuAdapter;
 import com.example.myfirstapplication.model.Menu;
 import com.example.myfirstapplication.model.Restaurant;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantMenuMainActivity extends AppCompatActivity {
+public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.MenuListClickListener {
 
     private List<Menu> menuList;
     private MenuAdapter menuAdapter;
+    private int totalItemInCart = 0;
+    private List<Menu> itemsInCartList;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -31,13 +34,34 @@ public class RestaurantMenuMainActivity extends AppCompatActivity {
         actionBar.setSubtitle(restaurant.getAddress());
 
         //get recycler view
-        RecyclerView recyclerView =findViewById(R.id.menuRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.menuRecyclerView);
         //get menus
         menuList = restaurant.getMenus();
         //get adapter
-        menuAdapter = new MenuAdapter(menuList);
+        menuAdapter = new MenuAdapter(menuList, this);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(menuAdapter);
+    }
+
+    @Override
+    public void onAddToCartClick(Menu menu) {
+        if (itemsInCartList == null) {
+            itemsInCartList = new ArrayList<>();
+        }
+        itemsInCartList.add(menu);
+        totalItemInCart = 0;
+
+        for (Menu m : itemsInCartList) {
+            totalItemInCart = totalItemInCart + m.getTotalInCart();
+        }
+//        buttonCheckout.setText("Checkout (" + totalItemInCart + ") items");
+    }
+
+    @Override
+    public void onUpdateCartClick(Menu menu) {
+        if (itemsInCartList == null) {
+            itemsInCartList = new ArrayList<>();
+        }
     }
 }

@@ -3,4 +3,5 @@
     <string name="icon_description">fast_food_image</string>
     <string name="test">this is a test text!!!</string>
     <string name="btn">Add to cart</string>
+    <string name="check_btn">Checkout</string>
 </resources>
