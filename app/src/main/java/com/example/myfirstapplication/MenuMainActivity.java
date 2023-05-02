@@ -21,6 +21,7 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
     private MenuAdapter menuAdapter;
     private int totalItemInCart = 0;
     private List<Menu> itemsInCartList;
+    private RecyclerView recyclerView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,7 +35,7 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         actionBar.setSubtitle(restaurant.getAddress());
 
         //get recycler view
-        RecyclerView recyclerView = findViewById(R.id.menuRecyclerView);
+        recyclerView = findViewById(R.id.menuRecyclerView);
         //get menus
         menuList = restaurant.getMenus();
         //get adapter
@@ -55,7 +56,7 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         for (Menu m : itemsInCartList) {
             totalItemInCart = totalItemInCart + m.getTotalInCart();
         }
-//        buttonCheckout.setText("Checkout (" + totalItemInCart + ") items");
+//        checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
     }
 
     @Override

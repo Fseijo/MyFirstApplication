@@ -22,7 +22,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     List<Menu> menuList;
     private MenuListClickListener clickListener;
 
-
     public MenuAdapter(List<Menu> menuList, MenuListClickListener clickListener) {
         this.menuList = menuList;
         this.clickListener = clickListener;
@@ -38,25 +37,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.display(menuList.get(position));
-
-//        holder.minus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Menu menu = menuList.get(position);
-//                int total = menu.getTotalInCart();
-//                total--;
-//                if (total > 0) {
-//                    menu.setTotalInCart(total);
-//                    clickListener.onItemClicked(menu);
-//                    holder.cart.setText(total + "");
-//                } else {
-//                    holder.layout.setVisibility(View.GONE);
-//                    holder.menuBtn.setVisibility(View.VISIBLE);
-//                    menu.setTotalInCart(total);
-//                }
-//            }
-//        });
-
     }
 
     @Override
@@ -72,9 +52,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView menuImage, minusBtn, plusBtn;
-        private TextView menuName, menuPrice, cartTxt,addToCartBtn, checkoutBtn;
+        private TextView menuName, menuPrice, cartTxt, addToCartBtn;
         private LinearLayout addMoreLayout;
-        int cart = 0;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -87,7 +66,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             plusBtn = itemView.findViewById(R.id.plus);
             cartTxt = itemView.findViewById(R.id.cartTxt);
             addMoreLayout = itemView.findViewById(R.id.addMoreLayout);
-            checkoutBtn = itemView.findViewById(R.id.checkout_btn);
         }
 
         void display(Menu menu) {
@@ -96,7 +74,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     .into(menuImage);
             menuName.setText(menu.getName());
             menuPrice.setText("Price: " + menu.getPrice() + "€");
-            cartTxt.setText(String.valueOf(cart));
+            cartTxt.setText(String.valueOf(menu.getTotalInCart()));
 
             //hide button
             addToCartBtn.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +85,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     clickListener.onAddToCartClick(menu);
                     addToCartBtn.setVisibility(View.GONE);
                     addMoreLayout.setVisibility(View.VISIBLE);
-                    cartTxt.setText(menu.getTotalInCart() + "");
+                    cartTxt.setText(menu.getTotalInCart().toString());
                 }
             });
 
@@ -116,21 +94,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Menu menu = menuList.get(getAdapterPosition());
-                    cart = cart + 1;
-                    cartTxt.setText(String.valueOf(cart));
+                    int cart = menu.getTotalInCart();
+                    cart++;
+                    menu.setTotalInCart(cart);
                     clickListener.onUpdateCartClick(menu);
+                    cartTxt.setText(String.valueOf(cart));
                 }
             });
             minusBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Menu menu = menuList.get(getAdapterPosition());
+                    int cart = menu.getTotalInCart();
                     cart--;
                     if (cart > 0) {
                         menu.setTotalInCart(cart);
                         clickListener.onUpdateCartClick(menu);
                         cartTxt.setText(String.valueOf(cart));
-                    }else {
+                    } else {
                         addToCartBtn.setVisibility(View.VISIBLE);
                         addMoreLayout.setVisibility(View.GONE);
                         menu.setTotalInCart(cart);
