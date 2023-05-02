@@ -13,4 +13,19 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20sp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/checkout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_checkout"
+        android:text="@string/check_btn"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="center"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
