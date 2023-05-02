@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.myfirstapplication.adapter.MenuAdapter;
 import com.example.myfirstapplication.model.Menu;
@@ -19,9 +20,10 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
 
     private List<Menu> menuList;
     private MenuAdapter menuAdapter;
-    private int totalItemInCart = 0;
+    private int totalItemInCart;
     private List<Menu> itemsInCartList;
     private RecyclerView recyclerView;
+    private TextView checkoutBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +43,8 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         //get adapter
         menuAdapter = new MenuAdapter(menuList, this);
 
+        checkoutBtn = findViewById(R.id.checkout_btn);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(menuAdapter);
     }
@@ -56,13 +60,23 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         for (Menu m : itemsInCartList) {
             totalItemInCart = totalItemInCart + m.getTotalInCart();
         }
-//        checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
+        checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
     }
 
     @Override
     public void onUpdateCartClick(Menu menu) {
-        if (itemsInCartList == null) {
-            itemsInCartList = new ArrayList<>();
+        if (itemsInCartList.contains(menu)){
+            int index = itemsInCartList.indexOf(menu);
+            itemsInCartList.remove(index);
+            itemsInCartList.add(index, menu);
+
+            totalItemInCart = 0;
+
+            for (Menu m : itemsInCartList) {
+                totalItemInCart = totalItemInCart + m.getTotalInCart();
+            }
+            checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
+
         }
     }
 }
