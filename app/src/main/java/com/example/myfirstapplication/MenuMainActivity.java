@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myfirstapplication.adapter.MenuAdapter;
+import com.example.myfirstapplication.model.CartActivity;
 import com.example.myfirstapplication.model.Menu;
 import com.example.myfirstapplication.model.Restaurant;
 
@@ -20,8 +24,8 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
 
     private List<Menu> menuList;
     private MenuAdapter menuAdapter;
-    private int totalItemInCart;
-    private List<Menu> itemsInCartList;
+    private int totalItemInCart = 0;
+    private List<Menu> itemsInCartList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TextView checkoutBtn;
 
@@ -42,13 +46,29 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         menuList = restaurant.getMenus();
         //get adapter
         menuAdapter = new MenuAdapter(menuList, this);
-
-        checkoutBtn = findViewById(R.id.checkout_btn);
-
+        //disposition of recycler view on grid
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        //set adapter
         recyclerView.setAdapter(menuAdapter);
+        //get button checkout
+        checkoutBtn = findViewById(R.id.checkout_btn);
+        //action of checkout button
+        checkoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemsInCartList != null && itemsInCartList.size() == 0){
+                    Toast.makeText(MenuMainActivity.this, "Your cart is empty! Please add some items ;)", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                restaurant.setMenus(itemsInCartList);
+                Intent intent = new Intent(MenuMainActivity.this, CartActivity.class);
+                intent.putExtra("RestaurantModel", restaurant);
+                startActivity(intent);
+            }
+        });
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onAddToCartClick(Menu menu) {
         if (itemsInCartList == null) {
@@ -63,6 +83,7 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
         checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onUpdateCartClick(Menu menu) {
         if (itemsInCartList.contains(menu)){
@@ -76,7 +97,19 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
                 totalItemInCart = totalItemInCart + m.getTotalInCart();
             }
             checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
+        }
+    }
 
+    @Override
+    public void onRemoveFromCartClick(Menu menu) {
+        if (itemsInCartList.contains(menu)){
+            itemsInCartList.remove(menu);
+            totalItemInCart = 0;
+
+            for (Menu m : itemsInCartList){
+                totalItemInCart = totalItemInCart + m.getTotalInCart();
+            }
+            checkoutBtn.setText("Checkout");
         }
     }
 }

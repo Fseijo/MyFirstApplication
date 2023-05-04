@@ -48,6 +48,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         void onAddToCartClick(Menu menu);
 
         void onUpdateCartClick(Menu menu);
+        void onRemoveFromCartClick(Menu menu);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -115,6 +116,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                         addToCartBtn.setVisibility(View.VISIBLE);
                         addMoreLayout.setVisibility(View.GONE);
                         menu.setTotalInCart(cart);
+                        clickListener.onRemoveFromCartClick(menu);
                     }
                 }
             });
