@@ -62,7 +62,7 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
                 }
                 restaurant.setMenus(itemsInCartList);
                 Intent intent = new Intent(MenuMainActivity.this, CartActivity.class);
-                intent.putExtra("RestaurantModel", restaurant);
+                intent.putExtra("Restaurant", restaurant);
                 startActivity(intent);
             }
         });
@@ -109,7 +109,11 @@ public class MenuMainActivity extends AppCompatActivity implements MenuAdapter.M
             for (Menu m : itemsInCartList){
                 totalItemInCart = totalItemInCart + m.getTotalInCart();
             }
+            if(totalItemInCart > 0){
+            checkoutBtn.setText("Checkout (" + totalItemInCart + ") items");
+            }else{
             checkoutBtn.setText("Checkout");
+            }
         }
     }
 }

@@ -4,4 +4,22 @@
     <string name="test">this is a test text!!!</string>
     <string name="btn">Add to cart</string>
     <string name="check_btn">Checkout</string>
+    <string name="custom_details">Customer Details</string>
+    <string name="card_details">Card Details</string>
+    <string name="total_items">Total Items</string>
+    <string name="pickup">Pickup</string>
+    <string name="delivery">Delivery</string>
+    <string name="label_name">Enter your name</string>
+    <string name="label_address">Enter your address</string>
+    <string name="label_zip">Enter your zip</string>
+    <string name="label_card">Enter Card Number</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="delivery_charge">Delivery Charge</string>
+    <string name="total">Total</string>
+    <string name="currency">€</string>
+    <string name="order_btn">Place your Order</string>
+    <string name="label_city">Enter your city</string>
+    <string name="label_state">Enter your state</string>
+    <string name="label_card_exp">Expiry (mm/yy)</string>
+    <string name="label_cvv">CVV</string>
 </resources>

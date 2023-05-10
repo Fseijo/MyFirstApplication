@@ -59,9 +59,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            menuImage = itemView.findViewById(R.id.menu_img);
-            menuName = itemView.findViewById(R.id.menu_name);
-            menuPrice = itemView.findViewById(R.id.menu_price);
+            menuImage = itemView.findViewById(R.id.cart_menu_img);
+            menuName = itemView.findViewById(R.id.cart_menu_name);
+            menuPrice = itemView.findViewById(R.id.cart_menu_price);
             addToCartBtn = itemView.findViewById(R.id.addToCartBtn);
             minusBtn = itemView.findViewById(R.id.minus);
             plusBtn = itemView.findViewById(R.id.plus);
@@ -74,7 +74,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     .load(menu.getUrl())
                     .into(menuImage);
             menuName.setText(menu.getName());
-            menuPrice.setText("Price: " + menu.getPrice() + "€");
+            menuPrice.setText("Price: €" + menu.getPrice());
             cartTxt.setText(String.valueOf(menu.getTotalInCart()));
 
             //hide button
