@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
-    List<Menu> menuList;
+    private List<Menu> menuList;
 
     public CartAdapter(List<Menu> menuList) {
         this.menuList = menuList;
@@ -32,7 +32,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
-        holder.display(menuList.get(position));
+        holder.orderMenuName.setText(menuList.get(position).getName());
+        holder.orderMenuPrice.setText("Price: €" + menuList.get(position).getPrice() * menuList.get(position).getTotalInCart());
+        holder.orderMenuQuantity.setText("Qty: " + TextView.BufferType.valueOf(menuList.get(position).getTotalInCart().toString()));
+        Glide.with(holder.orderMenuImg)
+                .load(menuList.get(position).getUrl())
+                .into(holder.orderMenuImg);
     }
 
     @Override
@@ -42,24 +47,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView menuImg;
-        private TextView menuName, menuPrice, menuQuantity;
+        private ImageView orderMenuImg;
+        private TextView orderMenuName, orderMenuPrice, orderMenuQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            menuImg = itemView.findViewById(R.id.cart_img);
-            menuName = itemView.findViewById(R.id.cart_name);
-            menuPrice = itemView.findViewById(R.id.cart_price);
-            menuQuantity = itemView.findViewById(R.id.cart_qty);
-        }
-
-        void display(Menu menu){
-            Glide.with(menuImg)
-                    .load(menu.getUrl())
-                    .into(menuImg);
-            menuName.setText(menu.getName());
-            menuPrice.setText("Price: €" + menu.getPrice().toString());
-            menuQuantity.setText(menu.getTotalInCart().toString());
+            orderMenuImg = itemView.findViewById(R.id.cart_img);
+            orderMenuName = itemView.findViewById(R.id.cart_name);
+            orderMenuPrice = itemView.findViewById(R.id.cart_price);
+            orderMenuQuantity = itemView.findViewById(R.id.cart_qty);
         }
     }
 }

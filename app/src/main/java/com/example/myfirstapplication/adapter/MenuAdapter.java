@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
-    List<Menu> menuList;
+    private List<Menu> menuList;
     private MenuListClickListener clickListener;
 
     public MenuAdapter(List<Menu> menuList, MenuListClickListener clickListener) {
@@ -36,7 +36,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.display(menuList.get(position));
+//        holder.display(menuList.get(position));
     }
 
     @Override

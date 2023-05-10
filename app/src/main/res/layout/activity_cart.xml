@@ -90,6 +90,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:stateListAnimator="@android:anim/bounce_interpolator"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_name"
@@ -114,6 +115,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:stateListAnimator="@android:anim/bounce_interpolator"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_address"
@@ -138,6 +140,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:stateListAnimator="@android:anim/bounce_interpolator"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_city"
@@ -163,6 +166,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:stateListAnimator="@android:anim/bounce_interpolator"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_state"
@@ -174,6 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/label_zip"
+                android:inputType="number"
                 android:singleLine="true"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -235,6 +240,7 @@
             android:layout_marginTop="8dp"
             android:hint="@string/label_cvv"
             android:inputType="number"
+            android:maxLength="3"
             app:layout_constraintEnd_toEndOf="@+id/label_card"
             app:layout_constraintTop_toBottomOf="@+id/label_card" />
 
@@ -289,7 +295,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/currency"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -314,17 +319,18 @@
                 android:layout_weight="1"
                 android:text="@string/delivery_charge"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/delivery_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/currency"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -353,7 +359,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/currency"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
                 android:textStyle="bold" />
